@@ -9,28 +9,28 @@ const DEMOS = [
     title: "Makeup Artist",
     category: "Beauty & Glamour",
     icon: <Sparkles size={20} />,
-    image: "bg-gradient-to-br from-pink-100 to-rose-200", // Replace with real images later
+    image: "bg-[url('https://images.unsplash.com/photo-1617890686219-509e671a8bd3?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center",
     link: "/demos/makeup",
   },
   {
     title: "Culinary Brand",
     category: "Private Chef & Catering",
     icon: <Utensils size={20} />,
-    image: "bg-gradient-to-br from-orange-100 to-amber-200",
+    image: "bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center",
     link: "/demos/chef",
   },
   {
     title: "Fashion Designer",
     category: "Bespoke Couture",
     icon: <Scissors size={20} />,
-    image: "bg-gradient-to-br from-indigo-100 to-slate-200",
+    image: "bg-[url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center",
     link: "/demos/fashion",
   },
   {
     title: "Photographer",
     category: "Visual Storytelling",
     icon: <Camera size={20} />,
-    image: "bg-gradient-to-br from-cyan-100 to-blue-200",
+    image: "bg-[url('https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center",
     link: "/demos/photography",
   },
 ];
@@ -80,9 +80,9 @@ export default function DemoSection() {
               whileHover={{ y: -10 }}
               className="group relative h-[400px] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm"
             >
-              {/* Background Mockup Layer */}
+              {/* Background Mockup Layer – now real image */}
               <div className={`absolute inset-0 transition-transform duration-700 group-hover:scale-110 ${demo.image}`}>
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" /> {/* Adjusted overlay for better readability */}
               </div>
 
               {/* Glass Content Card */}
