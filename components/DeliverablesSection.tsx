@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import Image from "next/image";
 
 const DELIVERABLES = [
   "Fully custom brand website design",
@@ -52,14 +53,28 @@ export default function DeliverablesSection() {
           </div>
         </div>
 
-        <div className="relative aspect-square bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
-          {/* Placeholder for high-end mockup image */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-indigo-50 flex items-center justify-center">
-            <span className="text-slate-300 font-bold italic uppercase tracking-widest text-sm">
-              Preview Mockup
+        <div className="relative aspect-square bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden group">
+
+          {/* Image */}
+          <Image
+            src="/temp.jpg"
+            alt="BizSite website preview"
+            fill
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+
+          {/* Soft gradient overlay */}
+          <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent"></div>
+
+          {/* Label */}
+          <div className="absolute bottom-6 left-6">
+            <span className="bg-white/90 backdrop-blur px-4 py-2 rounded-full text-xs font-bold tracking-widest text-slate-700 uppercase shadow">
+              Website Preview
             </span>
           </div>
+
         </div>
+
       </div>
     </section>
   );

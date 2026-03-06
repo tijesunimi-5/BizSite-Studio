@@ -1,10 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Sparkles, Utensils, Scissors, Camera, Laptop, Brush } from "lucide-react";
+import { ArrowLeft, ArrowUpRight,  Laptop } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import {Footer} from "@/components/Footer";
+import Image from "next/image";
 
 const CATEGORIES = ["All", "Beauty", "Culinary", "Fashion", "Creative"];
 
@@ -14,7 +15,7 @@ const DEMO_PROJECTS = [
     title: "Solange Diya Beauty",
     category: "Beauty",
     niche: "Makeup Artist",
-    image: "http://googleusercontent.com/image_collection/image_retrieval/7585948952554917005_0",
+    image: "/makeup.jpg",
     link: "/demos/makeup",
     color: "bg-rose-50",
     features: ["Online Booking", "Service Menu", "Client Gallery"]
@@ -24,7 +25,7 @@ const DEMO_PROJECTS = [
     title: "Maison de Chef",
     category: "Culinary",
     niche: "Private Dining",
-    image: "http://googleusercontent.com/image_collection/image_retrieval/1279824143866736345_0",
+    image: "/culinary.webp",
     link: "/demos/cullinary",
     color: "bg-amber-50",
     features: ["Menu Showcase", "Event Inquiry", "Recipe Blog"]
@@ -34,7 +35,7 @@ const DEMO_PROJECTS = [
     title: "Aura Atelier",
     category: "Fashion",
     niche: "Bespoke Couture",
-    image: "http://googleusercontent.com/image_collection/image_retrieval/3539292989329160999_0",
+    image: "/fdesigner.jpg",
     link: "/demos/fashion",
     color: "bg-indigo-50",
     features: ["Measurement Forms", "Portfolio", "Instagram Feed"]
@@ -44,7 +45,7 @@ const DEMO_PROJECTS = [
     title: "Lens & Light",
     category: "Creative",
     niche: "Photography",
-    image: "http://googleusercontent.com/image_collection/image_retrieval/2199422031121699847_0",
+    image: "/canon.jpg",
     link: "/demos/photography",
     color: "bg-cyan-50",
     features: ["Image Licensing", "Session Booking", "Client Portal"]
@@ -114,13 +115,17 @@ export default function DemosPage() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="group"
               >
-                <Link href={demo.link}>
-                  <div className={`relative aspect-[16/10] rounded-[2.5rem] overflow-hidden ${demo.color} border border-slate-100 mb-8`}>
-                    <img
+                <Link href={demo.link} className="group block">
+                  <div
+                    className={`relative aspect-16/10 rounded-[2.5rem] overflow-hidden ${demo.color} border border-slate-100 mb-8`}
+                  >
+                    <Image
                       src={demo.image}
                       alt={demo.title}
-                      className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                      fill
+                      className="object-cover grayscale-20 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                     />
+
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
 
                     {/* Floating Badge */}
@@ -136,12 +141,17 @@ export default function DemosPage() {
                       <span className="text-xs font-bold text-[#6366f1] uppercase tracking-[0.2em] mb-2 block">
                         {demo.niche}
                       </span>
+
                       <h3 className="text-3xl font-bold text-[#0f172a] mb-4 group-hover:text-[#6366f1] transition-colors">
                         {demo.title}
                       </h3>
+
                       <div className="flex gap-2">
-                        {demo.features.map(f => (
-                          <span key={f} className="text-[10px] font-bold px-3 py-1 bg-slate-100 text-slate-500 rounded-md uppercase">
+                        {demo.features.map((f) => (
+                          <span
+                            key={f}
+                            className="text-[10px] font-bold px-3 py-1 bg-slate-100 text-slate-500 rounded-md uppercase"
+                          >
                             {f}
                           </span>
                         ))}
