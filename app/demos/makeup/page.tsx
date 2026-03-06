@@ -68,12 +68,12 @@ export default function MUADemoPage() {
               Enhancing your natural radiance for weddings, red carpets, and life’s most celebrated moments.
             </p>
             <div className="flex gap-4">
-              <button className="px-8 py-4 bg-[#2D2424] text-white rounded-full font-bold text-sm hover:scale-105 transition-transform">
+              <a href='#booking' className="px-8 py-4 bg-[#2D2424] text-white rounded-full font-bold text-sm hover:scale-105 transition-transform">
                 Book Appointment
-              </button>
-              <button className="px-8 py-4 bg-transparent border border-[#2D2424] rounded-full font-bold text-sm hover:bg-white transition-all">
+              </a>
+              <a href="/demos/makeup/portfolio" className="px-8 py-4 bg-transparent border border-[#2D2424] rounded-full font-bold text-sm hover:bg-white transition-all">
                 View Portfolio
-              </button>
+              </a>
             </div>
           </motion.div>
 
