@@ -19,7 +19,7 @@ const DELIVERABLES = [
 
 export default function DeliverablesSection() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section id="benefits" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="text-4xl font-bold text-[#0f172a] mb-6">What You Get</h2>

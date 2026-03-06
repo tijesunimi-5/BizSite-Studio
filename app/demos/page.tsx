@@ -25,7 +25,7 @@ const DEMO_PROJECTS = [
     category: "Culinary",
     niche: "Private Dining",
     image: "http://googleusercontent.com/image_collection/image_retrieval/1279824143866736345_0",
-    link: "/demos/chef",
+    link: "/demos/cullinary",
     color: "bg-amber-50",
     features: ["Menu Showcase", "Event Inquiry", "Recipe Blog"]
   },
@@ -163,10 +163,10 @@ export default function DemosPage() {
                 We build custom solutions for all service-based brands. From personal trainers to architectural firms, we adapt to your specific workflow.
               </p>
             </div>
-            <button className="px-10 py-5 bg-[#0f172a] text-white rounded-full font-bold hover:bg-indigo-600 transition-all flex items-center gap-3">
+            <a href="https://wa.me/09152282614?text=Hi%20BizSite%20Studio,%20I%20need%20a%20custom%20website%20for%20my%20brand" className="px-10 py-5 bg-[#0f172a] text-white rounded-full font-bold hover:bg-indigo-600 transition-all flex items-center gap-3">
               Request a Custom Concept
               <Laptop size={18} />
-            </button>
+            </a>
           </div>
         </section>
       </main>

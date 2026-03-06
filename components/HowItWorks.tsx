@@ -11,7 +11,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 bg-slate-50">
+    <section id="how-it-works" className="py-24 bg-[#0f172a]">
       <div className="max-w-7xl mx-auto px-6 text-center mb-16">
         <h2 className="text-4xl font-bold text-[#0f172a]">The Path to Automation</h2>
       </div>

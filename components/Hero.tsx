@@ -53,10 +53,10 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <button className="group px-8 py-4 bg-[#0f172a] text-white rounded-full font-bold flex items-center gap-2 hover:bg-indigo-600 transition-all duration-300">
+          <a href="/demos" className="group px-8 py-4 bg-[#0f172a] text-white rounded-full font-bold flex items-center gap-2 hover:bg-indigo-600 transition-all duration-300">
             View Live Demo
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </a>
           <button className="px-8 py-4 bg-white text-slate-600 border border-slate-200 rounded-full font-bold flex items-center gap-2 hover:bg-slate-50 transition-all">
             <Play size={18} fill="currentColor" />
             See How It Works
