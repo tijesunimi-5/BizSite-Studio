@@ -9,7 +9,7 @@ const DEMOS = [
     title: "Makeup Artist",
     category: "Beauty & Glamour",
     icon: <Sparkles size={20} />,
-    image: "bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuDhAJ8Xk43u2xQVS7mnI_mNgtuVRMlSr8lWepns2sUPHPvxSoZMSsrfG-IHQ5xOxyhtY2GFUEeJhRdvzoaTZDCuGEKr70oRRU0FC0_8A-NL4btXjjjI9dKjtl_7LgAOHe6R5tuwKgBR-QUFam_tL626YyF0I8DAM1N5AVX_q18Z23jpgHDMuvKxK9YrXWKJp-sqZ_PsKVE9DN53AN6Ruvl8z7-UVW5h8sj167w9Mm4JciX-0TW-mi2ZnSKL9xXoR2ePyTJ9NN54dHE",
+    image: "bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuDhAJ8Xk43u2xQVS7mnI_mNgtuVRMlSr8lWepns2sUPHPvxSoZMSsrfG-IHQ5xOxyhtY2GFUEeJhRdvzoaTZDCuGEKr70oRRU0FC0_8A-NL4btXjjjI9dKjtl_7LgAOHe6R5tuwKgBR-QUFam_tL626YyF0I8DAM1N5AVX_q18Z23jpgHDMuvKxK9YrXWKJp-sqZ_PsKVE9DN53AN6Ruvl8z7-UVW5h8sj167w9Mm4JciX-0TW-mi2ZnSKL9xXoR2ePyTJ9NN54dHE')] bg-cover bg-center",
     link: "/demos/makeup",
   },
   {
