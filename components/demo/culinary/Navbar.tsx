@@ -7,9 +7,9 @@ export default function Navbar() {
           COCOA <span className="text-brand-gold">&</span> GOLD
         </span>
         <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest text-brand-charcoal">
-          <a href="/menu" className="hover:text-brand-gold transition-colors">Menu</a>
-          <a href="/gallery" className="hover:text-brand-gold transition-colors">Gallery</a>
-          <a href="/about" className="hover:text-brand-gold transition-colors">Our Story</a>
+          <a href="/demos/cullinary/menu" className="hover:text-brand-gold transition-colors">Menu</a>
+          <a href="/demos/cullinary/gallery" className="hover:text-brand-gold transition-colors">Gallery</a>
+          <a href="/demos/cullinary/about" className="hover:text-brand-gold transition-colors">Our Story</a>
         </div>
         <button className="bg-brand-chocolate text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand-gold transition-all">
           Book Now
