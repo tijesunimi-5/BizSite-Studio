@@ -1,4 +1,4 @@
-// app/gallery/page.tsx
+"use client"
 import Navbar from "@/components/demo/culinary/Navbar";
 import GalleryGrid from "@/components/demo/culinary/GalleryGrid";
 import { Footer } from "@/components/Footer";

@@ -1,4 +1,4 @@
-// app/about/page.tsx
+"use client"
 import Navbar from "@/components/demo/culinary/Navbar";
 import { Footer } from "@/components/Footer";
 import { Award, Heart, ShieldCheck, Truck } from "lucide-react";

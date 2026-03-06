@@ -1,4 +1,3 @@
-// components/FoodItemCard.tsx
 "use client";
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';

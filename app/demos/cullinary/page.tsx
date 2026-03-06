@@ -1,4 +1,4 @@
-// app/culinary/page.tsx
+"use client"
 import Navbar from "@/components/demo/culinary/Navbar";
 import HeroSection from "@/components/demo/culinary/HeroSection";
 import FoodItemCard from "@/components/demo/culinary/FoodItemCard";
