@@ -1,12 +1,12 @@
 // app/demos/cullinary/about/page.tsx
 "use client"
+import { Suspense } from "react"; //
 import Navbar from "@/components/demo/culinary/Navbar";
 import { Footer } from "@/components/Footer";
 import { Award, Heart, ShieldCheck, Truck } from "lucide-react";
 import { useDemoPreview } from "@/hooks/useDemoPreview";
 
-export default function AboutPage() {
-  // Initialize personalization logic
+function AboutContent() {
   const demo = useDemoPreview({
     brand: "Cocoa & Gold",
     city: "Lagos",
@@ -14,10 +14,7 @@ export default function AboutPage() {
 
   return (
     <main className="bg-brand-cream">
-      {/* Pass personalized brand name to Navbar */}
       <Navbar brandName={demo.brand} />
-
-      {/* Hero Section */}
       <section className="pt-40 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <span className="text-brand-gold font-bold tracking-widest uppercase text-xs mb-4 block">Our Story</span>
@@ -28,21 +25,16 @@ export default function AboutPage() {
             With over 12 years of culinary expertise, our team at {demo.brand} founded this studio to bridge the gap between luxury aesthetics and soulful flavors.
           </p>
           <p className="text-brand-charcoal/80 text-lg leading-relaxed">
-            What started as a boutique bakery has grown into one of {demo.city}&apos;s most sought-after catering studios, known for architectural wedding cakes and immersive dining experiences.
+            What started as a boutique bakery has grown into one of {demo.city}&apos;s most sought-after catering studios.
           </p>
         </div>
         <div className="relative">
           <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
             <img src="https://images.unsplash.com/photo-1583394293214-28ded15ee548" alt="Chef" className="w-full h-full object-cover" />
           </div>
-          <div className="absolute -bottom-10 -left-10 bg-brand-gold p-8 rounded-3xl hidden md:block">
-            <p className="text-brand-chocolate font-serif text-3xl">12+</p>
-            <p className="text-brand-chocolate/70 text-xs font-bold uppercase tracking-tighter">Years of Excellence</p>
-          </div>
         </div>
       </section>
 
-      {/* Trust Badges Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
           {[
@@ -61,8 +53,15 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-
       <Footer />
     </main>
+  );
+}
+
+export default function AboutPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-brand-cream" />}>
+      <AboutContent />
+    </Suspense>
   );
 }

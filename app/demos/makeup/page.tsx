@@ -1,20 +1,23 @@
 "use client";
+import { useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import {
   Star, MapPin, Plane, ArrowLeft,
   Instagram, ChevronRight
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-// --- NEW IMPORTS FOR CUSTOMIZATION ---
+
+// --- CUSTOMIZATION IMPORTS ---
 import { useDemoPreview } from "@/hooks/useDemoPreview";
 import DemoAlert from "@/components/demo/DemoAlert";
 import DemoCustomizer from "@/components/demo/DemoCustomizer";
 
-export default function MUADemoPage() {
+/**
+ * MUAContent handles the personalized UI logic.
+ * It is separated to be wrapped in a Suspense boundary for Next.js 16/Turbopack compatibility.
+ */
+function MUAContent() {
   const [bookingStep, setBookingStep] = useState(1);
-
-  // --- NEW STATE & HOOK LOGIC ---
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
   // Initialize the preview logic with MUA-specific defaults
@@ -27,7 +30,7 @@ export default function MUADemoPage() {
   return (
     <div className="min-h-screen bg-[#FDF8F5] text-[#2D2424] font-sans selection:bg-[#EAC7C7]">
 
-      {/* --- NEW CUSTOMIZATION UI COMPONENTS --- */}
+      {/* --- CUSTOMIZATION UI --- */}
       <DemoAlert
         isPersonalized={demo.isPersonalized}
         brand={demo.brand}
@@ -101,9 +104,9 @@ export default function MUADemoPage() {
               <a href='#booking' className="px-8 py-4 bg-[#2D2424] text-white rounded-full font-bold text-sm hover:scale-105 transition-transform">
                 Book Appointment
               </a>
-              <a href="/demos/makeup/portfolio" className="px-8 py-4 bg-transparent border border-[#2D2424] rounded-full font-bold text-sm hover:bg-white transition-all">
+              <Link href="/demos/makeup/portfolio" className="px-8 py-4 bg-transparent border border-[#2D2424] rounded-full font-bold text-sm hover:bg-white transition-all text-center">
                 View Portfolio
-              </a>
+              </Link>
             </div>
           </motion.div>
 
@@ -113,7 +116,7 @@ export default function MUADemoPage() {
             className="relative"
           >
             <div className="aspect-[4/5] bg-[#EAC7C7] rounded-[4rem] overflow-hidden shadow-2xl rotate-2">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8WLB5nYIjQ14SzqE6SKUuh-C1lN3feu6Ad49FFJC8m9Fh0hlW4biA8V_F70hWVeN5t8kjhmDeDXAuhzpUYiTNQFvKZIbTkTgJ7yyAMQ41a6GNDW4Q4tdQUJlmWNDfUizYMUVYZDX3QKpk0hIVQK0oK8-PqcZV3Ujf-f3A9PQU-XpBO-2n5Jseo2xmoqCxf2an60qPQYLnxl-XUVRgdzlptUNLOz9NWoF3LAJSkoKM7KzrpCCtJFT1qABKKUcPIAMy6HpLTysYccE" alt="img" />
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8WLB5nYIjQ14SzqE6SKUuh-C1lN3feu6Ad49FFJC8m9Fh0hlW4biA8V_F70hWVeN5t8kjhmDeDXAuhzpUYiTNQFvKZIbTkTgJ7yyAMQ41a6GNDW4Q4tdQUJlmWNDfUizYMUVYZDX3QKpk0hIVQK0oK8-PqcZV3Ujf-f3A9PQU-XpBO-2n5Jseo2xmoqCxf2an60qPQYLnxl-XUVRgdzlptUNLOz9NWoF3LAJSkoKM7KzrpCCtJFT1qABKKUcPIAMy6HpLTysYccE" alt="Client Transformation" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2D2424]/40 to-transparent" />
               <div className="absolute bottom-10 left-10 text-white">
                 <p className="font-serif italic text-3xl">Bridal Glow</p>
@@ -227,7 +230,6 @@ export default function MUADemoPage() {
       {/* --- Footer --- */}
       <footer className="py-16 bg-[#2D2424] text-white text-center">
         <div className="max-w-7xl mx-auto px-6">
-          {/* DYNAMIC FOOTER BRAND */}
           <h2 className="text-3xl font-serif italic mb-8">{demo.brand}</h2>
           <div className="flex justify-center gap-6 mb-12">
             <Instagram className="hover:text-[#D4AF37] cursor-pointer transition-colors" />
@@ -239,5 +241,16 @@ export default function MUADemoPage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+/**
+ * The default export wraps the content in Suspense to fix the Vercel build error.
+ */
+export default function MUADemoPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FDF8F5] animate-pulse" />}>
+      <MUAContent />
+    </Suspense>
   );
 }

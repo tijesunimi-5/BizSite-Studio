@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Navbar from "@/components/demo/culinary/Navbar";
 import HeroSection from "@/components/demo/culinary/HeroSection";
 import FoodItemCard from "@/components/demo/culinary/FoodItemCard";
@@ -14,8 +14,11 @@ import { useDemoPreview } from "@/hooks/useDemoPreview";
 import DemoAlert from "@/components/demo/DemoAlert";
 import DemoCustomizer from "@/components/demo/DemoCustomizer";
 
-export default function CulinaryDemoPage() {
-  // --- NEW STATE & HOOK LOGIC ---
+/**
+ * CulinaryContent handles the personalized UI logic.
+ * It is separated to be wrapped in a Suspense boundary.
+ */
+function CulinaryContent() {
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
   // Initialize the preview logic with Culinary-specific defaults
@@ -42,14 +45,14 @@ export default function CulinaryDemoPage() {
 
       <Navbar brandName={demo.brand} />
 
-      {/* The HeroSection likely needs internal updates to accept demo props 
-          but we've initialized the data here for page-level control */}
+      {/* HeroSection uses internal useDemoPreview logic to sync text */}
       <HeroSection />
 
       {/* Featured Menu Preview */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-serif text-brand-chocolate mb-4">Our Signature Creations</h2>
+          {/* Dynamic City personalization */}
           <p className="text-brand-charcoal/60 italic">Handcrafted with premium ingredients in the heart of {demo.city}</p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -72,6 +75,7 @@ export default function CulinaryDemoPage() {
         <div className="grid md:grid-cols-3 gap-8">
           <PricingPackageCard
             name="Bronze" price="150,000" guests="20"
+            /* Dynamic Delivery City */
             features={["Appetizers only", "Standard setup", "2 Servers", `${demo.city} Delivery`]}
           />
           <PricingPackageCard
@@ -89,6 +93,7 @@ export default function CulinaryDemoPage() {
       <section id="book" className="py-24 bg-brand-chocolate">
         <div className="text-center mb-16 px-6">
           <h2 className="text-4xl font-serif text-brand-gold mb-4">Reserve Your Date</h2>
+          {/* Dynamic Brand personalization */}
           <p className="text-white/60">Fill out our concierge form to secure your spot with {demo.brand}.</p>
         </div>
         <BookingForm />
@@ -97,5 +102,16 @@ export default function CulinaryDemoPage() {
       <CTASection />
       <Footer />
     </main>
+  );
+}
+
+/**
+ * The default export wraps the content in Suspense to prevent build errors.
+ */
+export default function CulinaryDemoPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-brand-cream animate-pulse" />}>
+      <CulinaryContent />
+    </Suspense>
   );
 }
