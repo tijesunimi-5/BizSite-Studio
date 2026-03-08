@@ -1,24 +1,56 @@
-"use client"
+"use client";
+import { useState } from "react";
 import Navbar from "@/components/demo/culinary/Navbar";
 import HeroSection from "@/components/demo/culinary/HeroSection";
 import FoodItemCard from "@/components/demo/culinary/FoodItemCard";
 import GalleryGrid from "@/components/demo/culinary/GalleryGrid";
 import PricingPackageCard from "@/components/demo/culinary/PricingPackageCard";
 import BookingForm from "@/components/demo/culinary/BookingForm";
-import {  Footer } from "@/components/Footer"; 
+import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/Benefits";
 
+// --- NEW IMPORTS FOR CUSTOMIZATION ---
+import { useDemoPreview } from "@/hooks/useDemoPreview";
+import DemoAlert from "@/components/demo/DemoAlert";
+import DemoCustomizer from "@/components/demo/DemoCustomizer";
+
 export default function CulinaryDemoPage() {
+  // --- NEW STATE & HOOK LOGIC ---
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+
+  // Initialize the preview logic with Culinary-specific defaults
+  const demo = useDemoPreview({
+    brand: "Maison de Chef",
+    city: "Lagos",
+    service: "Premium Cakes & Catering"
+  });
+
   return (
     <main className="bg-brand-cream min-h-screen pt-20">
-      <Navbar />
+      {/* --- NEW CUSTOMIZATION UI COMPONENTS --- */}
+      <DemoAlert
+        isPersonalized={demo.isPersonalized}
+        brand={demo.brand}
+        onOpenCustomizer={() => setIsCustomizerOpen(true)}
+      />
+
+      <DemoCustomizer
+        isOpen={isCustomizerOpen}
+        onClose={() => setIsCustomizerOpen(false)}
+        currentData={demo}
+      />
+
+      <Navbar brandName={demo.brand} />
+
+      {/* The HeroSection likely needs internal updates to accept demo props 
+          but we've initialized the data here for page-level control */}
       <HeroSection />
 
       {/* Featured Menu Preview */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-serif text-brand-chocolate mb-4">Our Signature Creations</h2>
-          <p className="text-brand-charcoal/60 italic">Handcrafted with premium ingredients in the heart of Lagos</p>
+          <p className="text-brand-charcoal/60 italic">Handcrafted with premium ingredients in the heart of {demo.city}</p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           <FoodItemCard name="Velvet Gold Wedding" price="250,000" image="https://images.unsplash.com/photo-1535254973040-607b474cb80d" />
@@ -40,7 +72,7 @@ export default function CulinaryDemoPage() {
         <div className="grid md:grid-cols-3 gap-8">
           <PricingPackageCard
             name="Bronze" price="150,000" guests="20"
-            features={["Appetizers only", "Standard setup", "2 Servers", "Lagos Island Delivery"]}
+            features={["Appetizers only", "Standard setup", "2 Servers", `${demo.city} Delivery`]}
           />
           <PricingPackageCard
             name="Silver" price="450,000" guests="50" isFeatured={true}
@@ -57,7 +89,7 @@ export default function CulinaryDemoPage() {
       <section id="book" className="py-24 bg-brand-chocolate">
         <div className="text-center mb-16 px-6">
           <h2 className="text-4xl font-serif text-brand-gold mb-4">Reserve Your Date</h2>
-          <p className="text-white/60">Fill out our concierge form to secure your spot.</p>
+          <p className="text-white/60">Fill out our concierge form to secure your spot with {demo.brand}.</p>
         </div>
         <BookingForm />
       </section>

@@ -2,16 +2,43 @@
 import { motion } from "framer-motion";
 import {
   Star, MapPin, Plane, ArrowLeft,
-  Instagram,  ChevronRight
+  Instagram, ChevronRight
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+// --- NEW IMPORTS FOR CUSTOMIZATION ---
+import { useDemoPreview } from "@/hooks/useDemoPreview";
+import DemoAlert from "@/components/demo/DemoAlert";
+import DemoCustomizer from "@/components/demo/DemoCustomizer";
 
 export default function MUADemoPage() {
   const [bookingStep, setBookingStep] = useState(1);
 
+  // --- NEW STATE & HOOK LOGIC ---
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+
+  // Initialize the preview logic with MUA-specific defaults
+  const demo = useDemoPreview({
+    brand: "Solange Diya Beauty",
+    city: "Los Angeles",
+    service: "Luxury Makeup Artistry"
+  });
+
   return (
     <div className="min-h-screen bg-[#FDF8F5] text-[#2D2424] font-sans selection:bg-[#EAC7C7]">
+
+      {/* --- NEW CUSTOMIZATION UI COMPONENTS --- */}
+      <DemoAlert
+        isPersonalized={demo.isPersonalized}
+        brand={demo.brand}
+        onOpenCustomizer={() => setIsCustomizerOpen(true)}
+      />
+
+      <DemoCustomizer
+        isOpen={isCustomizerOpen}
+        onClose={() => setIsCustomizerOpen(false)}
+        currentData={demo}
+      />
 
       {/* --- Fixed Navigation --- */}
       <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-[#EAC7C7]/30">
@@ -23,8 +50,9 @@ export default function MUADemoPage() {
             <span className="text-xs font-bold uppercase tracking-widest hidden sm:block">Back to Studio</span>
           </Link>
 
+          {/* DYNAMIC BRAND NAME */}
           <h1 className="text-2xl font-serif tracking-tighter lowercase italic font-bold">
-            Solange Diya <span className="text-[#D4AF37]">Beauty</span>
+            {demo.brand}
           </h1>
 
           <div className="hidden lg:flex gap-8 text-[11px] uppercase tracking-[0.2em] font-bold">
@@ -51,19 +79,21 @@ export default function MUADemoPage() {
               <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm border border-[#EAC7C7]/20">
                 <Star size={12} className="text-[#D4AF37] fill-[#D4AF37]" /> 5.0 Reviews
               </span>
+              {/* DYNAMIC CITY */}
               <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm border border-[#EAC7C7]/20">
-                <MapPin size={12} /> Los Angeles
+                <MapPin size={12} /> {demo.city}
               </span>
               <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm border border-[#EAC7C7]/20">
                 <Plane size={12} /> Travel Ready
               </span>
             </div>
 
+            {/* DYNAMIC SERVICE HEADLINE */}
             <h2 className="text-6xl md:text-8xl font-serif leading-[0.9] mb-8">
-              Luxury <br />
-              <span className="italic text-[#D4AF37]">Makeup</span> <br />
-              Artistry
+              {demo.service.split(' ').slice(0, -1).join(' ')} <br />
+              <span className="italic text-[#D4AF37]">{demo.service.split(' ').pop()}</span>
             </h2>
+
             <p className="text-lg text-slate-600 max-w-md mb-10 font-light leading-relaxed">
               Enhancing your natural radiance for weddings, red carpets, and life’s most celebrated moments.
             </p>
@@ -90,7 +120,6 @@ export default function MUADemoPage() {
                 <p className="text-xs uppercase tracking-widest opacity-80">Season 2026</p>
               </div>
             </div>
-            {/* Soft decorative blur */}
             <div className="absolute -top-10 -right-10 w-64 h-64 bg-[#EAC7C7]/30 blur-[100px] -z-10" />
           </motion.div>
         </div>
@@ -127,7 +156,7 @@ export default function MUADemoPage() {
         </div>
       </section>
 
-      {/* --- Booking Flow (Interactive) --- */}
+      {/* --- Booking Flow --- */}
       <section id="booking" className="py-24 bg-[#FDF8F5]">
         <div className="max-w-3xl mx-auto px-6">
           <div className="bg-white rounded-[3rem] shadow-xl border border-[#EAC7C7]/30 p-8 md:p-12">
@@ -198,13 +227,14 @@ export default function MUADemoPage() {
       {/* --- Footer --- */}
       <footer className="py-16 bg-[#2D2424] text-white text-center">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-serif italic mb-8">Solange Diya</h2>
+          {/* DYNAMIC FOOTER BRAND */}
+          <h2 className="text-3xl font-serif italic mb-8">{demo.brand}</h2>
           <div className="flex justify-center gap-6 mb-12">
             <Instagram className="hover:text-[#D4AF37] cursor-pointer transition-colors" />
-            <span className="text-xs tracking-[0.3em] font-bold uppercase">Los Angeles • London • NYC</span>
+            <span className="text-xs tracking-[0.3em] font-bold uppercase">{demo.city} • London • NYC</span>
           </div>
           <p className="text-[10px] text-slate-500 uppercase tracking-widest border-t border-white/10 pt-8">
-            © 2026 Solange Diya Beauty. Designed by BizSite Studio.
+            © 2026 {demo.brand}. Designed by BizSite Studio.
           </p>
         </div>
       </footer>

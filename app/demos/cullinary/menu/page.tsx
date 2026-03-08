@@ -1,10 +1,11 @@
-// app/menu/page.tsx
 "use client";
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from "@/components/demo/culinary/Navbar";
 import FoodItemCard from "@/components/demo/culinary/FoodItemCard";
 import { Footer } from "@/components/Footer";
+// --- NEW IMPORTS FOR CUSTOMIZATION ---
+import { useDemoPreview } from "@/hooks/useDemoPreview";
 
 const CATEGORIES = ["All", "Wedding Cakes", "Party Platters", "Corporate Buffets", "Pastries"];
 
@@ -19,17 +20,30 @@ const MENU_DATA = [
 export default function MenuPage() {
   const [activeTab, setActiveTab] = useState("All");
 
+  // --- NEW STATE & HOOK LOGIC ---
+  // Initialize the preview logic with Culinary-specific defaults
+  const demo = useDemoPreview({
+    brand: "Cocoa & Gold",
+    city: "Lagos",
+  });
+
   const filteredItems = activeTab === "All"
     ? MENU_DATA
     : MENU_DATA.filter(item => item.category === activeTab);
 
   return (
     <main className="bg-brand-cream min-h-screen">
-      <Navbar />
+      {/* Pass personalized brand name to Navbar */}
+      <Navbar brandName={demo.brand} />
+
       <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <header className="text-center mb-16">
-          <h1 className="text-6xl font-serif text-brand-chocolate mb-4">Our Menu</h1>
-          <p className="text-brand-gold tracking-[0.2em] uppercase text-sm">Curation of Lagos&apos; Finest Flavors</p>
+          <h1 className="text-6xl font-serif text-brand-chocolate mb-4">
+            {demo.brand} <span className="italic">Menu</span>
+          </h1>
+          <p className="text-brand-gold tracking-[0.2em] uppercase text-sm">
+            Curation of {demo.city}&apos;s Finest Flavors
+          </p>
         </header>
 
         {/* Category Filter */}
@@ -39,8 +53,8 @@ export default function MenuPage() {
               key={cat}
               onClick={() => setActiveTab(cat)}
               className={`px-8 py-3 rounded-full text-sm font-bold transition-all border ${activeTab === cat
-                  ? 'bg-brand-chocolate text-white border-brand-chocolate'
-                  : 'bg-transparent text-brand-chocolate border-brand-chocolate/20 hover:border-brand-gold'
+                ? 'bg-brand-chocolate text-white border-brand-chocolate'
+                : 'bg-transparent text-brand-chocolate border-brand-chocolate/20 hover:border-brand-gold'
                 }`}
             >
               {cat}

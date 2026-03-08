@@ -1,14 +1,22 @@
-// components/HeroSection.tsx
+// components/demo/culinary/HeroSection.tsx
 "use client";
 import { motion } from 'framer-motion';
+import { useDemoPreview } from "@/hooks/useDemoPreview";
 
 export default function HeroSection() {
+  // Initialize the preview logic with Culinary-specific defaults
+  const demo = useDemoPreview({
+    brand: "Cocoa & Gold",
+    city: "Lagos",
+    service: "Premium Cakes & Catering"
+  });
+
   return (
     <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1535254973040-607b474cb80d?auto=format&fit=crop&q=80"
+          src="/baker.jpg"
           alt="Luxury Wedding Cake"
           className="w-full h-full object-cover"
         />
@@ -30,7 +38,9 @@ export default function HeroSection() {
           transition={{ delay: 0.2 }}
           className="text-5xl md:text-8xl font-serif text-brand-cream leading-tight mb-8"
         >
-          Premium Cakes & Catering <br /> <span className="italic">in Lagos</span>
+          {/* Dynamic Service Name and City */}
+          {demo.service} <br />
+          <span className="italic text-brand-gold">in {demo.city}</span>
         </motion.h1>
 
         <motion.div

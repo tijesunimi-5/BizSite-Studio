@@ -1,28 +1,39 @@
+// app/demos/cullinary/about/page.tsx
 "use client"
 import Navbar from "@/components/demo/culinary/Navbar";
 import { Footer } from "@/components/Footer";
 import { Award, Heart, ShieldCheck, Truck } from "lucide-react";
+import { useDemoPreview } from "@/hooks/useDemoPreview";
 
 export default function AboutPage() {
+  // Initialize personalization logic
+  const demo = useDemoPreview({
+    brand: "Cocoa & Gold",
+    city: "Lagos",
+  });
+
   return (
     <main className="bg-brand-cream">
-      <Navbar />
+      {/* Pass personalized brand name to Navbar */}
+      <Navbar brandName={demo.brand} />
 
       {/* Hero Section */}
       <section className="pt-40 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <span className="text-brand-gold font-bold tracking-widest uppercase text-xs mb-4 block">Our Story</span>
-          <h1 className="text-6xl font-serif text-brand-chocolate mb-8">Meet Chef <span className="italic">Kemi Adeyemi</span></h1>
+          <h1 className="text-6xl font-serif text-brand-chocolate mb-8">
+            Meet the Chef at <span className="italic">{demo.brand}</span>
+          </h1>
           <p className="text-brand-charcoal/80 text-lg leading-relaxed mb-6">
-            With over 12 years of culinary expertise, Chef Kemi founded Cocoa & Gold to bridge the gap between luxury aesthetics and soulful African flavors.
+            With over 12 years of culinary expertise, our team at {demo.brand} founded this studio to bridge the gap between luxury aesthetics and soulful flavors.
           </p>
           <p className="text-brand-charcoal/80 text-lg leading-relaxed">
-            What started as a boutique bakery in Ikoyi has grown into one of Lagos&apos; most sought-after catering studios, known for architectural wedding cakes and immersive dining experiences.
+            What started as a boutique bakery has grown into one of {demo.city}&apos;s most sought-after catering studios, known for architectural wedding cakes and immersive dining experiences.
           </p>
         </div>
         <div className="relative">
           <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1583394293214-28ded15ee548" alt="Chef Kemi" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1583394293214-28ded15ee548" alt="Chef" className="w-full h-full object-cover" />
           </div>
           <div className="absolute -bottom-10 -left-10 bg-brand-gold p-8 rounded-3xl hidden md:block">
             <p className="text-brand-chocolate font-serif text-3xl">12+</p>
@@ -35,7 +46,7 @@ export default function AboutPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
           {[
-            { icon: <Award />, t: "Award Winning", d: "Voted Lagos Best Bakery 2024" },
+            { icon: <Award />, t: "Award Winning", d: `Voted ${demo.city} Best Bakery 2024` },
             { icon: <Heart />, t: "Fresh Ingredients", d: "Sourced from organic local farms" },
             { icon: <ShieldCheck />, t: "Quality Control", d: "5-Star Health & Safety Rating" },
             { icon: <Truck />, t: "Prompt Delivery", d: "Real-time tracking for all orders" }
